@@ -17,7 +17,7 @@ do
   endtime=$(date -d "$2 1mins" +%M:%S)
   if [[ "$currenttime" > "$starttime" ]] && [[ "$currenttime" < "$endtime" ]]; then
     mapfile < <(speedtest --accept-license --accept-gdpr --server-id=24640 --progress=no | grep 'Latency\|Download\|Upload')
-    LATENCY=$(echo ${MAPFILE[0]} | awk '{print $2}')
+    LATENCY=$(echo ${MAPFILE[0]} | awk '{print $3}')
     DOWNLOAD=$(echo ${MAPFILE[1]} | awk '{print $3}')
     UPLOAD=$(echo ${MAPFILE[2]} | awk '{print $3}')
     if [[ "$LATENCY" =~ ^[0-9.]+$ ]] && [[ "$DOWNLOAD" =~ ^[0-9.]+$ ]] && [[ "$UPLOAD" =~ ^[0-9.]+$ ]]; then

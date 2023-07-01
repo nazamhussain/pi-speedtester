@@ -1,46 +1,16 @@
 version: "3.9"
 
 services:
-  speedtester-plusnet:
+  speedtester-garage:
     build: .
     image: speedtester
-    container_name: speedtester-plusnet
-    command: ["plusnet", "00:00:00"]
+    restart: always
+    container_name: speedtester-garage
+    env_file: variables.env
+    environment:
+      - TEST_SERVICE=garage
+      - TEST_TIME=35
     extra_hosts:
       monitoring.nazam.co.uk: 192.168.0.230
     dns:
       - 192.168.0.1
-    networks:
-      - homelan
-  speedtester-bt:
-    build: .
-    image: speedtester
-    container_name: speedtester-bt
-    command: ["bt", "00:10:00"]
-    extra_hosts:
-      monitoring.nazam.co.uk: 192.168.1.230
-    dns:
-      - 192.168.1.254
-    networks:
-      - btlan
-  speedtester-kids:
-    build: .
-    image: speedtester
-    container_name: speedtester-kids
-    command: ["kids", "00:20:00"]
-    extra_hosts:
-      monitoring.nazam.co.uk: 192.168.0.230
-    dns:
-      - 192.168.40.254
-    networks:
-      - kidslan
-networks:
-  homelan:
-    external: true
-    name: homelan
-  btlan:
-    external: true
-    name: btlan
-  kidslan:
-    external: true
-    name: kidslan

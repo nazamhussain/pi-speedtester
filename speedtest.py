@@ -95,6 +95,7 @@ def speedtest(service, test_time):
               metrics['download'] = float(re.search(regex_download, line).group(1))
             elif regex_upload.match(line):
               metrics['upload'] = float(re.search(regex_upload, line).group(1))
+          dt = datetime.now().timetuple()
           metadata['hour'] = f"{dt.tm_hour:02d}00"
           metadata['day'] = f"{dt.tm_mday}"
           metadata['month'] = f"{dt.tm_mon}"
